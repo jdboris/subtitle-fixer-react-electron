@@ -13,7 +13,14 @@ let mainWindow;
 
 function createWindow() {
   // Create the browser window.
-  mainWindow = new BrowserWindow({ width: 800, height: 600 });
+  mainWindow = new BrowserWindow({
+    width: 800,
+    height: 600,
+    // NOTE: Required to use node modules like "fs" for reading .srt files
+    webPreferences: {
+      nodeIntegration: true
+    }
+  });
 
   const startUrl =
     process.env.ELECTRON_START_URL ||

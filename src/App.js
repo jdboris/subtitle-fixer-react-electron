@@ -1,6 +1,7 @@
 import React from "react";
 import { Time } from "./utilities";
 import TimeForm from "./components/time-form";
+import LoadFileForm from "./components/load-file-form";
 
 class App extends React.Component {
   state = {
@@ -14,6 +15,13 @@ class App extends React.Component {
   render() {
     return (
       <div className="App">
+        <LoadFileForm
+          initializeSubtitles={subtitles => {
+            console.log("initializing subtitles...", subtitles);
+            // this.setState({ subtitles });
+          }}
+        />
+
         <TimeForm
           id="talking-start-form"
           label="1. When does the talking start?"

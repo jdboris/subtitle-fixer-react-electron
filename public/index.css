@@ -43,6 +43,10 @@ input[type="number"]::-webkit-inner-spin-button {
   -webkit-appearance: none;
 }
 
+input[type="file"] {
+  min-width: 300px;
+}
+
 #talking-forms-section {
   display: none;
 }
@@ -60,10 +64,6 @@ input[type="number"]::-webkit-inner-spin-button {
 #subtitle-end-form {
   /* NOTE: This form no longer needs to be visible */
   display: none;
-}
-
-#file-name {
-  min-width: 300px;
 }
 
 .time-inputs input {
