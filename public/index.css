@@ -79,19 +79,11 @@ input[type="file"] {
   animation-duration: 3s;
 }
 
-#first-subtitle-form {
+.subtitle-picker {
   display: none;
 }
 
-.file-selected #first-subtitle-form {
-  display: block;
-}
-
-#last-subtitle-form {
-  display: none;
-}
-
-.file-selected #last-subtitle-form {
+.file-selected .subtitle-picker {
   display: block;
 }
 
@@ -117,7 +109,7 @@ input[type="file"] {
 }
 
 .subtitle:hover::after {
-  content: attr(data-text) attr(data-time-period);
+  content: attr(data-text) "\a"attr(data-time-period);
   white-space: pre;
   position: absolute;
   padding: 5px;

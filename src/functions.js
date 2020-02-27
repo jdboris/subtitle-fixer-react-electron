@@ -47,7 +47,7 @@ export function srtTimeToDate(timeString) {
   return dateTime;
 }
 
-function dateToSrtTime(dateTime) {
+export function dateToSrtTime(dateTime) {
   let parts = [];
   parts[0] = ("" + dateTime.getUTCHours()).padStart(2, "0");
   parts[1] = ("" + dateTime.getUTCMinutes()).padStart(2, "0");
@@ -75,7 +75,7 @@ function subtitlesToSrt(subtitles) {
   return text;
 }
 
-function dateToTimeString(dateTime) {
+export function dateToTimeString(dateTime) {
   let parts = [];
   parts[0] = ("" + dateTime.getUTCHours()).padStart(2, "0");
   parts[1] = ("" + dateTime.getUTCMinutes()).padStart(2, "0");

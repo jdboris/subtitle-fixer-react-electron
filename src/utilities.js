@@ -13,7 +13,7 @@ export function Time(
   milliseconds = null
 ) {
   let datetime = new Date();
-  datetime.setUTCFullYear(1970, 0, 2);
+  datetime.setUTCFullYear(1970, 0, 1);
 
   if (minutes == null && seconds == null && milliseconds == null) {
     datetime.setUTCHours(0);
