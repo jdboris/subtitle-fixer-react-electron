@@ -3,6 +3,7 @@ import TimeInput from "./time-input";
 
 class TimeForm extends Component {
   handleInput = (event, shouldContinue = false) => {
+    // Form the method name based on the time part and call the method using the string
     let methodName =
       "setUTC" + event.target.name.replace(/^\w/, c => c.toUpperCase());
     this.props.time[methodName](event.target.value);
@@ -32,16 +33,28 @@ class TimeForm extends Component {
               id={this.props.id + "-start-hours"}
               name="hours"
               max="99"
+              value={this.props.time.getUTCHours()}
               onInput={this.handleInput}
             />
             :
-            <TimeInput name="minutes" max="59" onInput={this.handleInput} />
+            <TimeInput
+              name="minutes"
+              max="59"
+              value={this.props.time.getUTCMinutes()}
+              onInput={this.handleInput}
+            />
             :
-            <TimeInput name="seconds" max="59" onInput={this.handleInput} />
+            <TimeInput
+              name="seconds"
+              max="59"
+              value={this.props.time.getUTCSeconds()}
+              onInput={this.handleInput}
+            />
             .
             <TimeInput
               name="milliseconds"
               max="999"
+              value={this.props.time.getUTCMilliseconds()}
               onInput={this.handleInput}
             />
           </div>

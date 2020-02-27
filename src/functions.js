@@ -2,62 +2,17 @@ import { Time } from "./utilities";
 import { Subtitle } from "./models/subtitle";
 const fs = window.require("electron").remote.require("fs");
 
-export function loadFile(filePath = "") {
-  let subtitles = [];
-
-  fs.readFile(filePath, "utf8", (err, text) => {
+export function loadFile(filePath, callback) {
+  fs.readFile(filePath, "utf8", (err, fileText) => {
     if (err) throw err;
-    callback(text);
+
+    let subtitles = srtToSubtitles(fileText);
+    if (subtitles.length == 0) {
+      console.error("No subtitles in file.");
+    } else {
+      callback(subtitles);
+    }
   });
-
-  function callback(text) {
-    subtitles = srtToSubtitles(text);
-
-    // if (subtitles.length <= 0) {
-    //   console.error("No subtitles in file.");
-    // } else {
-    //   let subtitle = subtitles[0];
-
-    //   let inputs = document.querySelectorAll(
-    //     "#subtitle-start-form .time-inputs input"
-    //   );
-    //   loadTimeIntoInputs(inputs, subtitle.start);
-    //   inputs = document.querySelectorAll(
-    //     "#talking-start-form .time-inputs input"
-    //   );
-    //   loadTimeIntoInputs(inputs, subtitle.start);
-
-    //   inputs[0].focus();
-
-    //   subtitle = subtitles[subtitles.length - 1];
-
-    //   inputs = document.querySelectorAll(
-    //     "#subtitle-end-form .time-inputs input"
-    //   );
-    //   loadTimeIntoInputs(inputs, subtitle.end);
-    //   inputs = document.querySelectorAll(
-    //     "#talking-end-form .time-inputs input"
-    //   );
-    //   loadTimeIntoInputs(inputs, subtitle.end);
-
-    //   function loadTimeIntoInputs(inputs, time) {
-    //     inputs[0].value = ("" + time.getUTCHours()).padStart(2, "0");
-    //     inputs[1].value = ("" + time.getUTCMinutes()).padStart(2, "0");
-    //     inputs[2].value = ("" + time.getUTCSeconds()).padStart(2, "0");
-    //     inputs[3].value = ("" + time.getUTCMilliseconds()).padStart(3, "0");
-    //   }
-    // }
-
-    // let form = document.querySelector("#first-subtitle-form");
-    // loadSubtitlesToForm(form, COLUMN_LIMIT, 1);
-
-    // let lastSubtitle = subtitles[subtitles.length - 1];
-    // let totalPages = parseInt(lastSubtitle.end / MILLISECONDS_PER_PAGE) + 1;
-    // form = document.querySelector("#last-subtitle-form");
-    // loadSubtitlesToForm(form, COLUMN_LIMIT, totalPages);
-
-    // document.body.classList.add("file-selected");
-  }
 }
 
 function srtToSubtitles(fileText) {

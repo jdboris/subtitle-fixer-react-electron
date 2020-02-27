@@ -17,8 +17,15 @@ class App extends React.Component {
       <div className="App">
         <LoadFileForm
           initializeSubtitles={subtitles => {
-            console.log("initializing subtitles...", subtitles);
-            // this.setState({ subtitles });
+            //console.log("initializing subtitles...", subtitles);
+            this.setState({ subtitles });
+          }}
+          setTalkingStart={talkingStart => {
+            console.log("SETTING START", talkingStart);
+            this.setState({ talkingStart });
+          }}
+          setTalkingEnd={talkingEnd => {
+            this.setState({ talkingEnd });
           }}
         />
 
@@ -30,6 +37,7 @@ class App extends React.Component {
             this.setState({ talkingStart });
           }}
         />
+        {this.state.talkingStart.toUTCString()}
         <TimeForm
           id="talking-end-form"
           label="2. When does the talking end?"

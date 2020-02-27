@@ -55,6 +55,7 @@ class TimeInput extends Component {
         onKeyDown={this.handleKeyDown}
         onFocus={this.handleFocus}
         onBlur={this.handleBlur}
+        defaultValue={this.props.value ? this.props.value : ""}
       />
     );
   }
