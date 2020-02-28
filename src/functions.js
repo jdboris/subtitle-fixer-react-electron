@@ -15,6 +15,18 @@ export function loadFile(filePath, callback) {
   });
 }
 
+export function saveFile(subtitles, filePath, callback) {
+  let text = subtitlesToSrt(subtitles);
+
+  fs.writeFile(filePath, text, function(err) {
+    if (err) {
+      return console.error(err);
+    }
+
+    loadFile(filePath, callback);
+  });
+}
+
 function srtToSubtitles(fileText) {
   let subtitles = [];
 
@@ -59,17 +71,15 @@ export function dateToSrtTime(dateTime) {
 
 function subtitlesToSrt(subtitles) {
   let text = "";
-  let i = 0;
 
-  // NOTE: Do NOT rely on i being the expected valid index/key (i.e. subtitles[i])
-  for (let subtitle of subtitles) {
+  for (let i = 0; i < subtitles.length; i++) {
+    let subtitle = subtitles[i];
     text += i + 1 + "\r\n";
     text += `${dateToSrtTime(subtitle.start)} --> ${dateToSrtTime(
       subtitle.end
     )}\r\n`;
     text += subtitle.text + "\r\n";
-    //text += "\r\n";
-    i++;
+    text += "\r\n";
   }
 
   return text;

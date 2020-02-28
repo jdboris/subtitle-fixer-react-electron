@@ -65,9 +65,8 @@ class SubtitlePicker extends Component {
             key={page.length}
             style={{ gridColumn: `${startColumn} / ${endColumn}` }}
             subtitle={subtitle}
-            onClick={event => {
-              // TODO: Call a callback from the parent
-              console.log(subtitle);
+            onClick={() => {
+              this.props.handlePick(i);
             }}
           />
         );

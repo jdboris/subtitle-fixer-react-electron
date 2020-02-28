@@ -1,5 +1,6 @@
 import React from "react";
 import { Time } from "./utilities";
+import { saveFile } from "./functions";
 import TimeForm from "./components/time-form";
 import SrtFileInput from "./components/srt-file-input";
 import SubtitlePicker from "./components/subtitle-picker";
@@ -7,10 +8,9 @@ import SubtitlePicker from "./components/subtitle-picker";
 class App extends React.Component {
   state = {
     subtitles: [],
+    filePath: "",
     talkingStart: new Time(),
-    talkingEnd: new Time(),
-    subtitleStart: new Time(),
-    subtitleEnd: new Time()
+    talkingEnd: new Time()
   };
 
   render() {
@@ -41,11 +41,38 @@ class App extends React.Component {
           <SubtitlePicker
             subtitles={this.state.subtitles}
             defaultPageNumber={1}
+            filePath={this.state.filePath}
             label="3. Select the first subtitle."
+            handlePick={index => {
+              let { subtitles } = this.state;
+              let subtitle = subtitles[index];
+              // Delete every subtitle before the new first subtitle
+              subtitles.splice(0, index);
+
+              let difference = this.state.talkingStart - subtitle.start;
+
+              for (let subtitle of subtitles) {
+                subtitle.start = new Time(
+                  subtitle.start.getTime() + difference
+                );
+                subtitle.end = new Time(subtitle.end.getTime() + difference);
+              }
+
+              saveFile(subtitles, this.state.filePath, subtitles => {
+                this.setState({ subtitles });
+
+                let first = subtitles[0];
+                this.setState({ talkingStart: new Time(first.start) });
+
+                let last = subtitles[subtitles.length - 1];
+                this.setState({ talkingEnd: new Time(last.end) });
+              });
+            }}
           />
           <SubtitlePicker
             subtitles={this.state.subtitles}
             defaultPageNumber={this.state.subtitles.length}
+            filePath={this.state.filePath}
             label="4. Select the last subtitle."
           />
         </div>
@@ -61,19 +88,9 @@ class App extends React.Component {
         <SrtFileInput
           initializeSubtitles={subtitles => {
             this.setState({ subtitles });
-
-            /*
-            let form = document.querySelector("#first-subtitle-form");
-            loadSubtitlesToForm(form, COLUMN_LIMIT, 1);
-
-            let lastSubtitle = subtitles[subtitles.length - 1];
-            let totalPages =
-              parseInt(lastSubtitle.end / MILLISECONDS_PER_PAGE) + 1;
-            form = document.querySelector("#last-subtitle-form");
-            loadSubtitlesToForm(form, COLUMN_LIMIT, totalPages);
-
-            document.body.classList.add("file-selected");
-            */
+          }}
+          setFilePath={filePath => {
+            this.setState({ filePath });
           }}
           setTalkingStart={talkingStart => {
             this.setState({ talkingStart });

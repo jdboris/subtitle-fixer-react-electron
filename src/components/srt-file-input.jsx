@@ -8,10 +8,13 @@ class SrtFileInput extends Component {
   handleChange = event => {
     let subtitles = [];
 
-    if (event.target.files.length > 0) {
+    let { files } = event.target;
+
+    if (files.length > 0) {
       // NOTE: Electron adds a path property to the files objects of the input
-      loadFile(event.target.files[0].path, subtitles => {
+      loadFile(files[0].path, subtitles => {
         this.props.initializeSubtitles(subtitles);
+        this.props.setFilePath(files[0].path);
 
         let first = subtitles[0];
         this.props.setTalkingStart(new Time(first.start));

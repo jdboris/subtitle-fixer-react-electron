@@ -148,6 +148,7 @@ input[type="file"] {
   display: none;
   width: 1000px;
   margin: auto;
+  margin-bottom: 30px;
 }
 
 .file-selected .subtitle-picker {

@@ -15,7 +15,7 @@ function createWindow() {
   // Create the browser window.
   mainWindow = new BrowserWindow({
     width: 1038,
-    height: 800,
+    height: 580,
     // NOTE: Required to use node modules like "fs" for reading .srt files
     webPreferences: {
       nodeIntegration: true
