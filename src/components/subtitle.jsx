@@ -6,13 +6,17 @@ class Subtitle extends Component {
   render() {
     return (
       <div
-        className="subtitle"
+        className="subtitle has-tooltip"
         style={this.props.style}
-        //timePeriod={dateToSrtTime(this.props.subtitle.start)}
-        //text={this.props.subtitle.text}
-        data-text={this.props.subtitle.text}
-        data-time-period={dateToSrtTime(this.props.subtitle.start)}
-      ></div>
+        onClick={this.props.onClick}
+      >
+        <div className="tooltip">
+          <div className="tooltip-time">
+            {dateToSrtTime(this.props.subtitle.start)}
+          </div>
+          {this.props.subtitle.text}
+        </div>
+      </div>
     );
   }
 }

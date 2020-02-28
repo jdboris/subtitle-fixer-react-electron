@@ -49,13 +49,18 @@ class TimeInput extends Component {
         type="number"
         min="0"
         max={this.props.max}
+        size={this.props.max.length}
         maxLength={this.props.max.length}
         placeholder={"0".repeat(this.props.max.length)}
         onInput={this.handleInput}
         onKeyDown={this.handleKeyDown}
         onFocus={this.handleFocus}
         onBlur={this.handleBlur}
-        defaultValue={this.props.value ? this.props.value : ""}
+        defaultValue={
+          this.props.value
+            ? this.props.value.toString().padStart(this.props.max.length, "0")
+            : ""
+        }
       />
     );
   }

@@ -62,6 +62,7 @@ class SubtitlePicker extends Component {
 
         let element = (
           <Subtitle
+            key={page.length}
             style={{ gridColumn: `${startColumn} / ${endColumn}` }}
             subtitle={subtitle}
             onClick={event => {
@@ -78,9 +79,28 @@ class SubtitlePicker extends Component {
       <div className="subtitle-picker">
         <input type="hidden" />
         <label>{this.props.label}</label>
-        <div className="subtitles-time-period">
-          ({dateToTimeString(new Time(rangeStart))}-
-          {dateToTimeString(new Time(rangeEnd))})
+
+        <div className="subtitles-time-period-controls">
+          <button
+            type="button"
+            onClick={() => {
+              this.setState({ pageNumber: pageNumber - 1 });
+            }}
+          >
+            &lt;
+          </button>
+          <div className="subtitles-time-period">
+            {dateToTimeString(new Time(rangeStart))}-
+            {dateToTimeString(new Time(rangeEnd))}
+          </div>
+          <button
+            type="button"
+            onClick={() => {
+              this.setState({ pageNumber: pageNumber + 1 });
+            }}
+          >
+            &gt;
+          </button>
         </div>
         <div className="time-scale">
           <div></div>
@@ -94,24 +114,6 @@ class SubtitlePicker extends Component {
         </div>
         <div className="subtitles" style={style}>
           {page}
-        </div>
-        <div className="subtitles-time-period-controls">
-          <button
-            type="button"
-            onClick={() => {
-              this.setState({ pageNumber: pageNumber - 1 });
-            }}
-          >
-            &lt;
-          </button>
-          <button
-            type="button"
-            onClick={() => {
-              this.setState({ pageNumber: pageNumber + 1 });
-            }}
-          >
-            &gt;
-          </button>
         </div>
       </div>
     );

@@ -15,7 +15,11 @@ class App extends React.Component {
 
   render() {
     return (
-      <div className={this.state.subtitles.length > 0 ? "file-selected" : ""}>
+      <div
+        className={
+          "app " + (this.state.subtitles.length > 0 ? "file-selected" : "")
+        }
+      >
         <SrtFileInput
           initializeSubtitles={subtitles => {
             this.setState({ subtitles });
@@ -41,22 +45,24 @@ class App extends React.Component {
           }}
         />
 
-        <TimeForm
-          id="talking-start-form"
-          label="1. When does the talking start?"
-          time={this.state.talkingStart}
-          setTime={talkingStart => {
-            this.setState({ talkingStart });
-          }}
-        />
-        <TimeForm
-          id="talking-end-form"
-          label="2. When does the talking end?"
-          time={this.state.talkingEnd}
-          setTime={talkingEnd => {
-            this.setState({ talkingEnd });
-          }}
-        />
+        <section className="talking-forms-section">
+          <TimeForm
+            id="talking-start-form"
+            label="1. When does the talking start?"
+            time={this.state.talkingStart}
+            setTime={talkingStart => {
+              this.setState({ talkingStart });
+            }}
+          />
+          <TimeForm
+            id="talking-end-form"
+            label="2. When does the talking end?"
+            time={this.state.talkingEnd}
+            setTime={talkingEnd => {
+              this.setState({ talkingEnd });
+            }}
+          />
+        </section>
 
         <SubtitlePicker
           subtitles={this.state.subtitles}
