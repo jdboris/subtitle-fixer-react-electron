@@ -1,5 +1,5 @@
 import React from "react";
-import { Time } from "./utilities";
+import { Time, scaleLinear } from "./utilities";
 import { saveFile } from "./functions";
 import TimeForm from "./components/time-form";
 import SrtFileInput from "./components/srt-file-input";
@@ -74,6 +74,43 @@ class App extends React.Component {
             defaultPageNumber={this.state.subtitles.length}
             filePath={this.state.filePath}
             label="4. Select the last subtitle."
+            handlePick={index => {
+              let { subtitles } = this.state;
+              let oldEnd = subtitles[index].end;
+              // Delete every subtitle after the new last subtitle
+              subtitles.splice(index + 1);
+
+              for (let subtitle of subtitles) {
+                subtitle.start = new Time(
+                  scaleLinear(
+                    subtitle.start,
+                    subtitles[0].start,
+                    subtitles[0].start,
+                    oldEnd,
+                    this.state.talkingEnd
+                  )
+                );
+                subtitle.end = new Time(
+                  scaleLinear(
+                    subtitle.end,
+                    subtitles[0].start,
+                    subtitles[0].start,
+                    oldEnd,
+                    this.state.talkingEnd
+                  )
+                );
+              }
+
+              saveFile(subtitles, this.state.filePath, subtitles => {
+                this.setState({ subtitles });
+
+                let first = subtitles[0];
+                this.setState({ talkingStart: new Time(first.start) });
+
+                let last = subtitles[subtitles.length - 1];
+                this.setState({ talkingEnd: new Time(last.end) });
+              });
+            }}
           />
         </div>
       );
