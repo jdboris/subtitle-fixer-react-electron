@@ -3,19 +3,15 @@ const app = electron.app;
 const BrowserWindow = electron.BrowserWindow;
 
 const path = require("path");
-const url = require("url");
 const isDev = require("electron-is-dev");
 
 let mainWindow;
 
 function createWindow() {
   mainWindow = new BrowserWindow({
-    width: 1038,
+    width: 1040,
     height: 580,
-    // NOTE: Required to use node modules like "fs" for reading .srt files
-    webPreferences: {
-      nodeIntegration: true
-    }
+    webPreferences: { nodeIntegration: true }
   });
   mainWindow.loadURL(
     isDev

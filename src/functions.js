@@ -7,7 +7,7 @@ export function loadFile(filePath, callback) {
     if (err) throw err;
 
     let subtitles = srtToSubtitles(fileText);
-    if (subtitles.length == 0) {
+    if (subtitles.length === 0) {
       console.error("No subtitles in file.");
     } else {
       callback(subtitles);

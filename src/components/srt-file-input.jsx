@@ -6,8 +6,6 @@ class SrtFileInput extends Component {
   state = {};
 
   handleChange = event => {
-    let subtitles = [];
-
     let { files } = event.target;
 
     if (files.length > 0) {

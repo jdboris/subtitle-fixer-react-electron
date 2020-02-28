@@ -24,7 +24,7 @@ class TimeInput extends Component {
     let input = event.target;
     let shouldContinue = false;
 
-    if (input.checkValidity() == false) {
+    if (input.checkValidity() === false) {
       input.value = this.state.oldValue;
       input.classList.remove("invalid");
       // NOTE: Must be asynchronous to trigger the CSS animation

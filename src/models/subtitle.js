@@ -1,5 +1,4 @@
 import { srtTimeToDate } from "../functions";
-import { Time } from "../utilities";
 
 export class Subtitle {
   constructor(srtTimeString, text) {
