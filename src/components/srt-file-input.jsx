@@ -1,5 +1,6 @@
 import React, { Component } from "react";
 import { loadFile } from "../functions";
+import { Time } from "../utilities";
 
 class SrtFileInput extends Component {
   state = {};
@@ -13,10 +14,10 @@ class SrtFileInput extends Component {
         this.props.initializeSubtitles(subtitles);
 
         let first = subtitles[0];
-        this.props.setTalkingStart(first.start);
+        this.props.setTalkingStart(new Time(first.start));
 
         let last = subtitles[subtitles.length - 1];
-        this.props.setTalkingEnd(last.end);
+        this.props.setTalkingEnd(new Time(last.end));
       });
     }
   };
