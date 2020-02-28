@@ -3,3 +3,4 @@ Perform offsetting, linear correction, and/or cropping of subtitles easily and i
 
 ___NOTE:__ This project is a migration of [my other Subtitle Fixer](https://github.com/jdboris/subtitle-fixer) from nw.js and raw JavaScript to Electron and React, still under development_
 
+![Example](https://i.imgur.com/KS8FHJ1.png)
