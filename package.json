@@ -1,15 +1,15 @@
 {
   "name": "subtitle-fixer-react-electron",
+  "main": "public/electron.js",
   "version": "0.1.0",
   "private": true,
-  "main": "src/electron-starter.js",
-  "homepage": "./",
   "dependencies": {
     "@testing-library/jest-dom": "^4.2.4",
-    "@testing-library/react": "^9.4.1",
-    "@testing-library/user-event": "^7.2.1",
-    "react": "^16.12.0",
-    "react-dom": "^16.12.0",
+    "@testing-library/react": "^9.3.2",
+    "@testing-library/user-event": "^7.1.2",
+    "electron-is-dev": "^1.1.0",
+    "react": "^16.13.0",
+    "react-dom": "^16.13.0",
     "react-scripts": "3.4.0"
   },
   "scripts": {
@@ -17,8 +17,7 @@
     "build": "react-scripts build",
     "test": "react-scripts test",
     "eject": "react-scripts eject",
-    "electron": "electron .",
-    "dev": "nf start"
+    "electron-dev": "concurrently \"SET BROWSER=none&&npm start\" \"wait-on http://localhost:3000 && electron .\""
   },
   "eslintConfig": {
     "extends": "react-app"
@@ -36,7 +35,9 @@
     ]
   },
   "devDependencies": {
-    "electron": "^8.0.1",
-    "foreman": "^3.0.1"
+    "concurrently": "^5.1.0",
+    "electron": "^8.0.2",
+    "electron-builder": "^22.3.2",
+    "wait-on": "^4.0.1"
   }
 }
