@@ -8,7 +8,6 @@ class SubtitlePicker extends Component {
     pageNumber: this.props.defaultPageNumber,
     subtitles: this.props.subtitles
   };
-
   loadSubtitlePage = pageNumber => {};
 
   render() {
@@ -30,6 +29,7 @@ class SubtitlePicker extends Component {
         parseInt(subtitles[subtitles.length - 1].end / millisecondsPerPage) + 1;
 
       pageNumber = this.state.pageNumber;
+
       if (pageNumber < 1) pageNumber = 1;
       if (pageNumber > totalPages) pageNumber = totalPages;
 
