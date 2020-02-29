@@ -10,7 +10,8 @@
 
 # production
 /build
-/dist
+/dist/*
+!/dist/subtitle-fixer-react-electron Setup 0.1.0.exe
 
 # misc
 .DS_Store
