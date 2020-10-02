@@ -1,7 +1,7 @@
 # Subtitle Fixer
 Perform offsetting, linear correction, and/or cropping of subtitles easily and intuitively.
 
-![Example](https://i.imgur.com/KS8FHJ1.png)
+![Example](https://i.imgur.com/K1On7kt.png)
 
 ## Installation
 
